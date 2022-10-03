@@ -50,5 +50,8 @@ public class Personne extends AbstractEntity{
     @JsonIgnore
     protected Collection<Couverture> couvertures;
 
+    @Column(name="type_entite", insertable=false, updatable=false)
+    private String discriminator;
+
 
 }

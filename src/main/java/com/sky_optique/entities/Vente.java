@@ -44,7 +44,7 @@ public class Vente extends AbstractEntity{
     @ManyToOne
     @JoinColumn(name = "id_facture")
     private Facture facture;
-    
+
     @ManyToOne
     @JoinColumn(name = "id_stock", nullable = false)
     private Stock stock;

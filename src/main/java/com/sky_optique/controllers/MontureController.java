@@ -11,6 +11,7 @@ import com.sky_optique.repositories.MarqueRepository;
 import com.sky_optique.repositories.MontureRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,14 +46,16 @@ public class MontureController {
     public @ResponseBody Optional<Monture> getMontureById(@PathVariable long id) {
         return montureRepository.findById(id);
     }
-	
+
+    @Transactional
     @PostMapping(path = "/")
     public @ResponseBody Monture addMonture(@RequestBody Monture monture) {
 		if(monture.getMarque() !=null && monture.getMarque().getId() == null)
         	monture.setMarque(marqueRepository.save(monture.getMarque()));
         return montureRepository.save(monture);
     }
-	
+
+    @Transactional
     @PutMapping(path = "/{id}")
     public @ResponseBody Monture updateMonture(@PathVariable long id, @RequestBody Monture monture) {
 		monture.setId(id);

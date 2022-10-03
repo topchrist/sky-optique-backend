@@ -50,6 +50,7 @@ public class CompagniController {
 	
     @PutMapping(path = "/{id}")
     public @ResponseBody Compagni updateCompagni(@PathVariable long id, @RequestBody Compagni compagni) {
+        System.out.println(compagni.toString());
     	compagni.setId(id);
         return compagniRepository.save(compagni);
     }

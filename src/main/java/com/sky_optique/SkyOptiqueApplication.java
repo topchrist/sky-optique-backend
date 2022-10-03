@@ -34,8 +34,8 @@ public class SkyOptiqueApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception  {
 
-        if(utilisateurRepository.getUtilisateurByNom("administrateur") == null){
-            Utilisateur utilisateur1 = new Utilisateur("administrateur", "admin", "admin");
+        if(utilisateurRepository.getUtilisateurByNom("Administrateur") == null){
+            Utilisateur utilisateur1 = new Utilisateur("Administrateur", "admin", "admin");
             utilisateurRepository.save(utilisateur1);
         }
     }

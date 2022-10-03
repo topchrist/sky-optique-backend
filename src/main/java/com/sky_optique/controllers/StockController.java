@@ -13,6 +13,7 @@ import com.sky_optique.repositories.MontureRepository;
 import com.sky_optique.repositories.StockRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -59,11 +60,19 @@ public class StockController {
     public @ResponseBody Stock addStock(@RequestBody Stock stock) {
         return stockRepository.save(stock);
     }
+    @Transactional
     @PostMapping(path = "/monture/")
     public @ResponseBody Stock addStockMonture(@RequestBody Stock stock) {
-    	stock.setProduit(montureRepository.save((Monture)stock.getProduit()));
+        Monture monture = new Monture();
+        System.out.println(stock);
+
+        if(stock.getProduit() !=null && stock.getProduit().getId() == null)
+            stock.setProduit(montureRepository.save((Monture) stock.getProduit()));
+
+    	//stock.setProduit(montureRepository.save((Monture)stock.getProduit()));
         return stockRepository.save(stock);
     }
+    @Transactional
     @PostMapping(path = "/lentille/")
     public @ResponseBody Stock addStockLentille(@RequestBody Stock stock) {
     	stock.setProduit(lentilleRepository.save((Lentille)stock.getProduit()));
